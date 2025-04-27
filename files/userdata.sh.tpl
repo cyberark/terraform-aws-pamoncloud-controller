@@ -3,7 +3,7 @@ set -e
 
 # Update and install required packages
 dnf update -y
-dnf install -y unzip python3-pip
+dnf install -y unzip python3-pip sshpass
 
 # Install Packer
 PACKER_VERSION="1.10.0"
@@ -14,7 +14,7 @@ unzip "$PACKER_PACKAGE_NAME" -d /usr/local/bin/
 rm -f "$PACKER_PACKAGE_NAME"
 
 # Install Python3 requirements
-python3 -m pip install "ansible==6.7.0" "ansible-core>=2.13.7" "pywinrm>=0.4.3" jq
+python3 -m pip install "ansible==6.7.0" "ansible-core>=2.13.7" "pywinrm>=0.4.3" "pypsrp>=0.5.0" jq
 
 # Verify installation
 packer version
