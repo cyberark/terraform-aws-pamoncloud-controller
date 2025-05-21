@@ -16,6 +16,8 @@ rm -f "$PACKER_PACKAGE_NAME"
 # Install Python3 requirements
 python3 -m pip install "ansible==6.7.0" "ansible-core>=2.13.7" "pywinrm>=0.4.3" "pypsrp>=0.5.0" jq
 
+mount -o remount,size=600M /tmp
+
 # Verify installation
 packer version
 ansible --version
