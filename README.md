@@ -19,7 +19,7 @@ Below is an example usage of this Terraform module:
 module "pamoncloud_controller" {
   source = "cyberark/pamoncloud-controller/aws"
 
-  instance_type     = "t3.medium"
+  instance_type     = "m5.xlarge"
   vpc_cidr          = "172.31.0.0/16"
   subnet_cidr       = "172.31.1.0/24"
   allowed_ssh_cidr  = ["3.5.7.9/32", "2.4.6.8/32"]
@@ -54,7 +54,7 @@ No modules.
 
 | Name | Description | Type | Default |
 |------|-------------|------|---------|
-| <a name="input_instance_type"></a> [instance\_type](#input\_instance\_type) | EC2 instance type for the controller node | `string` | `"t2.micro"` |
+| <a name="input_instance_type"></a> [instance\_type](#input\_instance\_type) | EC2 instance type for the controller node | `string` | `"m5.large"` |
 | <a name="input_vpc_cidr"></a> [vpc\_cidr](#input\_vpc\_cidr) | CIDR block for the VPC | `string` | `"10.0.0.0/16"` |
 | <a name="input_subnet_cidr"></a> [subnet\_cidr](#input\_subnet\_cidr) | CIDR block for the subnet | `string` | `"10.0.1.0/24"` |
 | <a name="input_allowed_ssh_cidr"></a> [allowed\_ssh\_cidr](#input\_allowed\_ssh\_cidr) | CIDR blocks allowed for SSH inbound access | `list` | `["0.0.0.0/0"]` |

@@ -1,6 +1,6 @@
 locals {
   aws_region    = "eu-west-1"
-  instance_type = "t2.micro"
+  instance_type = "m5.large"
   vpc_cidr      = "10.0.0.0/16"
   subnet_cidr   = "10.0.1.0/24"
 }
