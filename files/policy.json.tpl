@@ -34,7 +34,8 @@
         "ec2:DescribeVolumes",
         "ec2:CreateVolume",
         "ec2:DeleteVolume",
-        "ec2:GetPasswordData"
+        "ec2:GetPasswordData",
+        "ec2:DescribeAvailabilityZones"
       ],
       "Resource": "*"
     },
