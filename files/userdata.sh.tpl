@@ -6,7 +6,7 @@ dnf update -y
 dnf install -y unzip python3-pip sshpass
 
 # Install Packer
-PACKER_VERSION="1.10.0"
+PACKER_VERSION="1.13.1"
 PACKER_PACKAGE_NAME=$(printf "packer_%s_linux_amd64.zip" $PACKER_VERSION)
 
 curl -LO "https://releases.hashicorp.com/packer/$PACKER_VERSION/$PACKER_PACKAGE_NAME"
