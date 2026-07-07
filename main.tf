@@ -32,7 +32,7 @@ resource "aws_route_table_association" "public" {
 resource "aws_subnet" "public" {
   vpc_id                  = aws_vpc.main.id
   cidr_block              = var.subnet_cidr
-  map_public_ip_on_launch = true
+  map_public_ip_on_launch = false
 }
 
 resource "aws_security_group" "instance_sg" {
@@ -113,6 +113,12 @@ resource "aws_instance" "ec2_instance" {
   vpc_security_group_ids = [aws_security_group.instance_sg.id]
   iam_instance_profile   = aws_iam_instance_profile.instance_profile.name
 
+  metadata_options {
+    http_tokens                 = "required"
+    http_endpoint               = "enabled"
+    http_put_response_hop_limit = 1
+  }
+
   user_data = templatefile("${path.module}/files/userdata.sh.tpl", {
     s3_bucket_name = var.s3_bucket_name
     s3_file_name   = var.s3_file_name
@@ -120,6 +126,8 @@ resource "aws_instance" "ec2_instance" {
 
   root_block_device {
     volume_size = 30
+    encrypted   = true
+    kms_key_id  = var.ebs_kms_key_id
   }
 
   tags = {

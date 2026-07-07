@@ -17,9 +17,13 @@ variable "subnet_cidr" {
 }
 
 variable "allowed_ssh_cidr" {
-  description = "CIDR blocks allowed for SSH inbound access"
-  type        = list(any)
-  default     = ["0.0.0.0/0"] # Change for better security
+  description = "CIDR blocks allowed for SSH inbound access. Must be a specific allow-list; do not use 0.0.0.0/0 in production."
+  type        = list(string)
+  default     = ["10.0.0.0/8"]
+  validation {
+    condition     = !contains(var.allowed_ssh_cidr, "0.0.0.0/0")
+    error_message = "allowed_ssh_cidr must not include 0.0.0.0/0. Provide a specific CIDR allow-list."
+  }
 }
 
 variable "key_name" {
@@ -35,4 +39,10 @@ variable "s3_bucket_name" {
 variable "s3_file_name" {
   description = "BYOI zip file name to be downloaded from S3"
   type        = string
+}
+
+variable "ebs_kms_key_id" {
+  description = "KMS key ID or ARN for root EBS encryption. Leave empty to use the default aws/ebs key."
+  type        = string
+  default     = ""
 }

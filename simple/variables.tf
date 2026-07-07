@@ -1,7 +1,7 @@
 variable "allowed_ssh_cidr" {
-  description = "CIDR blocks allowed for SSH inbound access"
-  type        = list(any)
-  default     = ["0.0.0.0/0"] # Change to a more specific allow list for better security
+  description = "CIDR blocks allowed for SSH inbound access. Must not be 0.0.0.0/0."
+  type        = list(string)
+  default     = ["10.0.0.0/8"]
 }
 
 variable "key_name" {

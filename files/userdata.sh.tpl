@@ -18,6 +18,9 @@ python3 -m pip install "ansible==6.7.0" "ansible-core>=2.13.7" "pywinrm>=0.4.3" 
 
 mount -o remount,size=600M /tmp
 
+# Set HOME for AWS CLI to avoid configuration errors
+export HOME=/root
+
 # Verify installation
 packer version
 ansible --version
@@ -27,9 +30,17 @@ aws --version
 # Download PAMonCloud BYOI file from S3
 aws s3 cp "s3://${s3_bucket_name}/${s3_file_name}" "/home/ec2-user"
 
-# Unzip downloaded file
-cd /home/ec2-user
-unzip "${s3_file_name}" -d PAMonCloud_BYOI
+# Unzip downloaded file as ec2-user to maintain proper ownership
+cd /home/ec2-user || exit 1
+sudo -u ec2-user unzip "${s3_file_name}" -d PAMonCloud_BYOI
 rm -f "${s3_file_name}"
+
+# Validate BYOI toolkit extraction
+if [ -d "/home/ec2-user/PAMonCloud_BYOI/CorePAS" ]; then
+    echo "BYOI toolkit extracted successfully"
+else
+    echo "ERROR: BYOI toolkit extraction failed - CorePAS directory not found"
+    exit 1
+fi
 
 echo "Setup complete!"

@@ -38,7 +38,7 @@ See [`examples`](/examples) directory for working examples to reference.
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](https://github.com/hashicorp/terraform) | 1.9.8 |
+| <a name="requirement_terraform"></a> [terraform](https://github.com/hashicorp/terraform) | >= 1.9.8, <= 1.13.5 |
 
 ## Providers
 
